@@ -27,22 +27,23 @@ main.addEventListener("click",(e)=>{
     }
 })
 
-document.querySelector("#read").addEventListener("click",(e)=>{
-    if(e.target.checked==true) e.target.value="Yes"
-    else e.target.value="No"
-})
+
 
 
 document.querySelector("#form-add").addEventListener('click',(e)=>{
     e.preventDefault()
+
+    //check for validity
+    for(let required of main.querySelectorAll('[required]')){
+        if (!required.reportValidity()) return;
+    }
     
-    if(document.querySelector("#read").checked)document.querySelector("#read").value="Yes"
-    else document.querySelector("#read").value="No"
-
-
-    let temp= [...document.querySelectorAll("#book__form  input")].map((n)=>{
-        return n.value})
-    createAddBook(...temp)
+    
+    
+    //create book
+    let temp= [...document.querySelectorAll("#book__form  input")]
+    let [name,author,pages,isread]=[temp[0].value,temp[1].value,temp[2].value,temp[3].checked]
+    createAddBook(name,author,pages,isread)
 })
 
 function addToDom(book){
@@ -53,16 +54,20 @@ function addToDom(book){
         temp.innerText=n;
         row.appendChild(temp)
     }
+
+    //create removal button functionality
     const btn=document.createElement("button")
     btn.innerText="x"
 
     const removebutton=document.createElement("td")
     removebutton.appendChild(btn)
     row.appendChild(removebutton)
-    
+    const relatedBook = books.length-1
+
     btn.addEventListener("click",(e)=>{
     const parent=removebutton.parentElement
     parent.outerHTML="";
+    books.splice(relatedBook,1)
     })
 
 }

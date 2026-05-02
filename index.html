@@ -39,17 +39,17 @@ add book button
                 <form action="" id="book__form">
                     <label for="name">
                         Name <br>
-                        <input type="text" name="name" id="name">
+                        <input type="text" name="name" id="name" required>
 
                     </label>
                     <label for="author">
                         Author <br>
-                        <input type="text" name="author" id="author">
+                        <input type="text" name="author" id="author" required>
 
                     </label>
                     <label for="pages">
                         Pages <br>
-                        <input type="number" name="pages" id="pages">
+                        <input type="number" name="pages" id="pages" min="1" placeholder="1">
 
                     </label>
                     <label for="read">
@@ -58,7 +58,7 @@ add book button
                     </label>
 
 
-                    <button type="button" id="form-add">add book</button>
+                    <button type="submit" id="form-add">add book</button>
                 </form>
             </dialog>
         </main>
